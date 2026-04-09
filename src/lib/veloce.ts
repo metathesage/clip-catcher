@@ -1,5 +1,5 @@
 // Server configuration - change this to your backend URL
-export const SERVER_URL = "http://localhost:8899";
+export const SERVER_URL = "https://clip-catcher.onrender.com";
 
 export interface QualityOption {
   label: string;
