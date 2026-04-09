@@ -27,6 +27,7 @@ const Index = () => {
   const [url, setUrl] = useState("");
   const [loading, setLoading] = useState(false);
   const [loadingText, setLoadingText] = useState("Retrieving media…");
+  const [loadingTimer, setLoadingTimer] = useState<ReturnType<typeof setTimeout> | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [result, setResult] = useState<VideoInfo | null>(null);
   const [sourceUrl, setSourceUrl] = useState("");
@@ -72,6 +73,12 @@ const Index = () => {
     setLoading(true);
     setLoadingText("Retrieving media…");
     setStatus("Working");
+
+    // Show cold-start message after 8s
+    const timer = setTimeout(() => {
+      setLoadingText("Server is waking up — free tier can take 30-60s…");
+    }, 8000);
+    setLoadingTimer(timer);
     setSourceUrl(raw);
 
     try {
@@ -93,10 +100,12 @@ const Index = () => {
         setError(msg);
       }
     } finally {
+      if (loadingTimer) clearTimeout(loadingTimer);
+      setLoadingTimer(null);
       setLoading(false);
       setStatus("Ready");
     }
-  }, [url, noWatermark, audioOnly]);
+  }, [url, noWatermark, audioOnly, loadingTimer]);
 
   const handleSimilarSelect = (clipUrl: string) => {
     setUrl(clipUrl);
@@ -131,16 +140,16 @@ const Index = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
-            className="text-[10px] tracking-[0.52em] uppercase text-primary mb-7"
+            className="text-xs font-medium tracking-[0.45em] uppercase text-primary mb-7"
           >
-            — The Art of Capture —
+            — Swift & Powerful —
           </motion.p>
 
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5 }}
-            className="font-display font-light text-[clamp(52px,8vw,112px)] leading-[0.9] text-foreground mb-5"
+            className="font-display font-normal text-[clamp(56px,9vw,120px)] leading-[0.88] text-foreground mb-6"
           >
             Download<br />
             <em className="italic text-primary">Anything.</em>
@@ -150,7 +159,7 @@ const Index = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.7 }}
-            className="text-xs tracking-[0.22em] uppercase text-muted-foreground mb-11"
+            className="text-sm font-medium tracking-[0.2em] uppercase text-muted-foreground mb-11"
           >
             YouTube &nbsp;·&nbsp; TikTok &nbsp;·&nbsp; Kick &nbsp;·&nbsp; X &nbsp;·&nbsp; Instagram &nbsp;·&nbsp; 1000+ sites
           </motion.p>
