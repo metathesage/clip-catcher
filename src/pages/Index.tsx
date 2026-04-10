@@ -95,7 +95,7 @@ const Index = () => {
     } catch (e: unknown) {
       const msg = e instanceof Error ? e.message : "Unknown error";
       if (msg.includes("fetch") || msg.includes("Failed") || msg.includes("NetworkError")) {
-        setError("Cannot reach Veloce server — make sure server.py is running, then try again.");
+        setError("Cannot reach server — it may be starting up. Please try again in a moment.");
       } else {
         setError(msg);
       }
@@ -123,7 +123,7 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen cursor-none md:cursor-none">
+    <div className="min-h-screen md:cursor-none">
       <CustomCursor />
       <AmbientGlow />
       <HistoryPanel
@@ -132,7 +132,7 @@ const Index = () => {
         onClose={() => setHistoryOpen(false)}
         onSelect={handleHistorySelect}
       />
-      <Navbar status={status} onOpenHistory={() => setHistoryOpen(true)} />
+      <Navbar status={status} historyCount={history.length} onOpenHistory={() => setHistoryOpen(true)} />
 
       <main>
         <section className="relative z-10 min-h-screen flex flex-col items-center justify-center px-5 md:px-9 pt-32 pb-20 text-center">
@@ -161,7 +161,7 @@ const Index = () => {
             transition={{ delay: 0.7 }}
             className="text-sm font-medium tracking-[0.2em] uppercase text-muted-foreground mb-11"
           >
-            YouTube &nbsp;·&nbsp; TikTok &nbsp;·&nbsp; Kick &nbsp;·&nbsp; X &nbsp;·&nbsp; Instagram &nbsp;·&nbsp; 1000+ sites
+            YouTube &nbsp;·&nbsp; TikTok &nbsp;·&nbsp; Kick &nbsp;·&nbsp; X &nbsp;·&nbsp; Erome &nbsp;·&nbsp; 1000+ sites
           </motion.p>
 
           <motion.div
