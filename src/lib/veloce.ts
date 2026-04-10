@@ -1,5 +1,5 @@
-// Server configuration - change this to your backend URL
-export const SERVER_URL = "https://clip-catcher-production.up.railway.app";
+// Server configuration - reads from VITE_SERVER_URL environment variable
+export const SERVER_URL = import.meta.env.VITE_SERVER_URL as string;
 
 export interface QualityOption {
   label: string;
