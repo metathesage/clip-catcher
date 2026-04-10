@@ -1,5 +1,5 @@
 // Server configuration - change this to your backend URL
-export const SERVER_URL = "https://clip-catcher.onrender.com";
+export const SERVER_URL = "https://clip-catcher-production.up.railway.app";
 
 export interface QualityOption {
   label: string;
