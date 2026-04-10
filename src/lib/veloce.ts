@@ -40,7 +40,7 @@ export interface HistoryItem {
 export const PLATFORMS = [
   "YouTube", "TikTok", "Kick", "X / Twitter", "Instagram",
   "Pinterest", "Reddit", "Facebook", "Twitch", "Vimeo",
-  "SoundCloud", "Dailymotion", "1000+ more"
+  "SoundCloud", "Dailymotion", "Erome", "1000+ more"
 ];
 
 export function detectPlatform(url: string): string | null {
@@ -56,6 +56,7 @@ export function detectPlatform(url: string): string | null {
   if (/vimeo\.com/.test(url)) return "Vimeo";
   if (/soundcloud\.com/.test(url)) return "SoundCloud";
   if (/dailymotion\.com/.test(url)) return "Dailymotion";
+  if (/erome\.com/.test(url)) return "Erome";
   if (url.startsWith("http")) return "Video";
   return null;
 }

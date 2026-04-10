@@ -11,7 +11,7 @@ const UrlInput = ({ value, onChange, onFetch, disabled }: UrlInputProps) => {
   const platform = detectPlatform(value);
   const hint = platform
     ? `Detected: ${platform} — press Fetch`
-    : "Paste any video or Instagram link to begin";
+    : "Paste any video link to begin";
 
   const doPaste = async () => {
     try {
@@ -36,11 +36,20 @@ const UrlInput = ({ value, onChange, onFetch, disabled }: UrlInputProps) => {
           value={value}
           onChange={(e) => onChange(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && onFetch()}
-          placeholder="Paste your video or Instagram link here…"
+          placeholder="Paste your video link here…"
           autoComplete="off"
           spellCheck={false}
           className="flex-1 bg-transparent border-none outline-none text-foreground font-body text-[15px] font-light tracking-wide py-5 caret-primary placeholder:text-muted-foreground/40 placeholder:italic placeholder:font-display placeholder:text-base"
         />
+        {value && (
+          <button
+            onClick={() => onChange("")}
+            className="flex-shrink-0 px-3 text-muted-foreground/50 hover:text-foreground transition-colors duration-200 text-lg"
+            title="Clear"
+          >
+            ×
+          </button>
+        )}
         <button
           onClick={doPaste}
           className="flex-shrink-0 px-4 h-[62px] bg-transparent border-none border-l border-surface-4 text-muted-foreground font-body text-[10px] font-medium tracking-[0.22em] uppercase cursor-pointer transition-all duration-300 hover:text-primary hover:bg-gold-glow whitespace-nowrap"
